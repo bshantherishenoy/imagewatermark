@@ -9,12 +9,14 @@ PATH = os.path.join("C://Users//<USERNAME>//Downloads")
 
 def gen_watermark():
     file = input_1.get()
+    data = input_2.get()
     with Image.open(f"{PATH}/{file}").convert("RGBA") as im:
         txt = Image.new('RGBA', im.size, (255, 255, 255, 0))
         fnt = ImageFont.truetype("arial.ttf", 88)
         d = ImageDraw.Draw(txt)
         heart = "\u2665"
-        d.text((10 , 20), f"Made with {heart} by Shantheri", font=fnt, encoding='unic')
+
+        d.text((10, 20), data, font=fnt, encoding='unic')
         out = Image.alpha_composite(im, txt)
         out.show()
 
@@ -32,6 +34,12 @@ label_x1.grid(row=0, column=0)
 
 input_1 = Entry(width=31)
 input_1.grid(row=0, column=1)
+
+label_x3 = Label(text="Enter the watermark text", font=("Arial", 18, "bold"))
+label_x3.grid(row=1, column=0)
+
+input_2 = Entry(width=31)
+input_2.grid(row=1, column=1)
 
 button_2 = Button(text="Generate Water Mark", width=32,font=("Arial", 8, "bold"), command=gen_watermark)
 button_2.grid(row=0,column=2)
